@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+    app:
+      build: .
+      volumes: 
+        - .:/MonitoriaOO/project
+      ports:
+        - 8000:8000
+      image: app:project
+      container_name : monitoria_container
+      command: python3 manage.py runserver 0.0.0.0:8000
+   

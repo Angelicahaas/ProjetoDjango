@@ -1,14 +1,44 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import Bookform, ReviewForm
+from django.contrib .auth import authenticate, login
+from django.contrib import messages
+from .forms import LogUsers, Bookform, ReviewForm
 from .models import User, Book, Review
 
 
 def users(request):
     user = User.objects.all()
 
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Login realizado com sucesso!")
+            return redirect('users')
+        else:
+            messages.success(request, "Tente novamente.")
+            return redirect('users')
+    
+    else: 
+        return render(request, 'page1.html', {'users': users})
+    
+
 def RegisterUser(request):
     if request.method == 'POST':
-        form = 
+        form = LogUsers(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, "Conta cadastrada com sucesso.")
+            return redirect('users')
+        else:
+            form = LogUsers()
+            return render(request, 'registeruser.html', {'form': form})
+        
 
 
 

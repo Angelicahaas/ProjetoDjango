@@ -1,0 +1,9 @@
+<h2>Atualizar Avaliação</h2>
+
+<form method="post">
+  {% csrf_token %}
+  
+  {{ form.as_p }}
+
+  <button type="submit">Atualizar Avaliação</button>
+</form>

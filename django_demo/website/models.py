@@ -1,11 +1,23 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class Reader(models.Model):
-    create = models.DateTimeField(auto_now_add=True)
-    completed_name = models.CharField(max_length=50)
-    email = models.CharFIeld(max_length=50)
-
-
+class Book(models.Model):
+    title = models.CharField(label="Título", max_length=100)
+    author = models.CharField(label="Autor", max_length=100)
+    publication_date = models.DateField(label="Data de Publicação")
+    
     def __str__(self):
-        return (f"{self.completed_name} {self.email}")
+        return self.title
+
+
+
+class Review(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')))
+    coment = models.TextChoices()
+
+    
+    def __str__(self):
+        return self.coment

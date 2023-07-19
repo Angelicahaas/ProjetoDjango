@@ -1,6 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Bookform, ReviewForm
-from .models import Book, Review
+from .models import User, Book, Review
+
+
+def users(request):
+    user = User.objects.all()
+
+def RegisterUser(request):
+    if request.method == 'POST':
+        form = 
+
 
 
 def RegisterBooks(request):

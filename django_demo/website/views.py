@@ -21,7 +21,7 @@ def users(request):
             return redirect('users')
     
     else: 
-        return render(request, 'page1.html', {'users': users})
+        return render(request, 'login.html', {'users': users})
     
 
 def RegisterUser(request):
@@ -51,7 +51,8 @@ def RegisterBooks(request):
         else:
             form = Bookform()
 
-        return render(request, 'register_bool.html', {'form': form})
+        return render(request, 'registerbook.html', {'form': form})
+    
     
 def WriteReview(request, book_id):
     book = Book.objects.get(id=book_id)
@@ -69,7 +70,7 @@ def WriteReview(request, book_id):
         else:
             form = ReviewForm
         
-        return render(request, 'WriteReview.html', {'form': form, 'book': book})
+        return render(request, 'writereview.html', {'form': form, 'book': book})
     
 def ReviewUpdate(request, review_id):
     review = get_object_or_404(Review, id=review_id)
@@ -83,7 +84,7 @@ def ReviewUpdate(request, review_id):
     else:
         form = ReviewForm(instance=review)
 
-    return render(request, 'review_update.html', {'form': form, 'book': book})
+    return render(request, 'reviewupdate.html', {'form': form, 'book': book})
 
 def ReviewDelete(request, review_id):
     review = get_object_or_404(Review, id=review_id)
@@ -93,4 +94,4 @@ def ReviewDelete(request, review_id):
         review.delete()
         return redirect('book_detail', book_id=book.id)
 
-    return render(request, 'review_delete.html', {'review': review, 'book': book})
+    return render(request, 'reviewdelete.html', {'review': review, 'book': book})

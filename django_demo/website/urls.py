@@ -7,5 +7,5 @@ urlpatterns = [
     path('registerbooks/', views.RegisterBooks, name='registerbook'),
     path('writereview/', views.WriteReview, name='writereview'),
     path('reviewupdate/<int:pk>', views.ReviewUpdate, name='update'),
-    path('reviewdelete/<int:pk>', views.ReviewDelete, name='delete'),
+    path('reviewdelete/<int:pk>', views.ReviewDelete, name='delete'),a
 ]

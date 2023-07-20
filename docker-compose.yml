@@ -4,10 +4,10 @@ services:
     app:
       build: .
       volumes: 
-        - .:/MonitoriaOO/project
+        - .:/django_demo/django_demo
       ports:
         - 8000:8000
       image: app:project
-      container_name : monitoria_container
+      container_name : container
       command: python3 manage.py runserver 0.0.0.0:8000
    

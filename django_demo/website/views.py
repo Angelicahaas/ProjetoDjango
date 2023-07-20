@@ -5,7 +5,7 @@ from .forms import LogUsers, Bookform, ReviewForm
 from .models import User, Book, Review
 
 
-def users(request):
+def home(request):
     user = User.objects.all()
 
     if request.method == 'POST':
@@ -21,7 +21,7 @@ def users(request):
             return redirect('users')
     
     else: 
-        return render(request, 'login.html', {'users': users})
+        return render(request, 'login.html', {'user': user})
     
 
 def RegisterUser(request):

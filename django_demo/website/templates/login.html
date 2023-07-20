@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Bem vindo!</title>
-</head>
-<body>
+{% extends 'base.html'%}
+
+{%block content%}
+
+
   <h2>Autenticação de Usuário</h2>
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
@@ -15,6 +14,6 @@
     <input type="password" id="password" name="password" required>
 
     <button type="submit">Login</button>
-  </form>
-</body>
-</html>
+  </form>]
+
+{%endblock%}

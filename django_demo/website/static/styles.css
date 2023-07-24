@@ -1,0 +1,75 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    color: #662d91; /* Roxo mais escuro */
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #662d91; /* Roxo mais escuro */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #4a1b6d; /* Roxo escuro */
+}
+
+/* Estilizando os botões com classes diferentes */
+.register-button {
+    background-color: #9c71e8; /* Roxo claro */
+}
+
+.view-button {
+    background-color: #8c53cd; /* Roxo médio */
+}
+
+.logout-button {
+    background-color: #804fb1; /* Roxo escuro */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estilizando o cabeçalho da página */
+.header {
+    background-color: #9c71e8; /* Roxo claro */
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilizando os links no rodapé da página */
+.footer {
+    margin-top: 40px;
+}
+
+.footer a {
+    color: #662d91; /* Roxo mais escuro */
+    margin: 0 10px;
+}
+
+/* Estilizando o rodapé em si */
+.footer p {
+    margin-bottom: 0;
+}
+

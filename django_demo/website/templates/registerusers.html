@@ -1,26 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registrar Usuário</title>
+    <title>Registrar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #e8d6eb; /* Roxo claro */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            margin: 50px auto;
+        }
+
+        .col-form-label {
+            color: #41115f; /* Roxo escuro */
+        }
+
+        .btn-primary {
+            background-color: #300e46; /* Roxo escuro */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a148c; /* Roxo médio */
+        }
+
+        .btn-primary, .btn-primary:hover {
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #6a1b9a; /* Roxo escuro */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4a148c; /* Roxo médio */
+        }
+
+        .btn-secondary, .btn-secondary:hover {
+            color: #fff;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        h2 {
+            color: #6a1b9a; /* Roxo escuro */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-  <h2>Registrar Usuário</h2>
-  <form method="post">
-    {% csrf_token %}
-
-    <label for="username">Nome de Usuário:</label>
-    <input type="text" id="username" name="username" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="password1">Senha:</label>
-    <input type="password" id="password1" name="password1" required>
-
-    <label for="password2">Confirmar Senha:</label>
-    <input type="password" id="password2" name="password2" required>
-
-    <button type="submit">Registrar</button>
-  </form>
+    <div class="container">
+        <h2>Registrar Usuário</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="{{ form.username.id_for_label }}" class="col-sm-2 col-form-label">Nome de Usuário:</label>
+                <div class="col-sm-10">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.email.id_for_label }}" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.password1.id_for_label }}" class="col-sm-2 col-form-label">Senha:</label>
+                <div class="col-sm-10">
+                    {{ form.password1 }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.password2.id_for_label }}" class="col-sm-2 col-form-label">Confirmar Senha:</label>
+                <div class="col-sm-10">
+                    {{ form.password2 }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="{% url 'login' %}" class="btn btn-primary">Registrar</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- book_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes do Livro</title>
+</head>
+<body>
+    <h1>Detalhes do Livro</h1>
+    <p>Título: {{ book.title }}</p>
+    <!-- Outras informações do livro... -->
+
+    <!-- Link para exclusão do livro -->
+    <a href="{% url 'deletebook' book.id %}">Excluir Livro</a>
+
+    <a href="{% url 'listbooks' %}">Voltar para a Lista de Livros</a>
+</body>
+</html>

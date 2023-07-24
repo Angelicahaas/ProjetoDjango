@@ -1,19 +1,101 @@
-{% extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HaasBook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        /* Estilos adicionais aqui */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
 
-{%block content%}
+        .container {
+            background-color: #e4d4e7; /* Roxo claro */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            margin: 50px auto;
+        }
 
+        .form-label {
+            color: #6a1b9a; /* Roxo escuro */
+        }
 
-  <h2>Autenticação de Usuário</h2>
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
+        .btn-primary {
+            background-color: #43175e; /* Roxo escuro */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
 
-    <label for="username">Nome de Usuário:</label>
-    <input type="text" id="username" name="username" required>
+        .btn-primary:hover {
+            background-color: #4a148c; /* Roxo médio */
+        }
 
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required>
+        .btn-primary, .btn-primary:hover {
+            color: #fff;
+        }
 
-    <button type="submit">Login</button>
-  </form>]
+        .btn-secondary {
+            background-color: #441c5e; /* Roxo escuro */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-left: 10px;
+        }
 
-{%endblock%}
+        .btn-secondary:hover {
+            background-color: #4a148c; /* Roxo médio */
+        }
+
+        .btn-secondary, .btn-secondary:hover {
+            color: #fff;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+        h2 {
+            color: #6a1b9a; /* Roxo escuro */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h2>Bem-vindo(a) ao Checklist Books</h2>
+                <form method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nome de Usuário:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a href="{% url 'registerusers' %}" class="btn btn-secondary">Fazer Cadastro</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

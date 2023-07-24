@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: #eadfec; /* Roxo claro */
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #fff; /* Cor do texto branco */
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #541a79; /* Roxo escuro */
+        }
+
+        button {
+            background-color: #4a1869; /* Roxo escuro */
+            color: #f0dddd;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #651bc0; /* Roxo médio */
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Checklist Books</h1>
+        
+        <a href="{% url 'registerbook' %}">
+            <button>Registrar Livro</button>
+        </a>
+
+        <a href="{% url 'listbooks' %}">
+            <button>Ver Livros Registrados</button>
+        </a>
+
+        <a href="{% url 'login' %}">
+            <button>Sair</button>
+        </a>
+    </div>
+</body>
+</html>

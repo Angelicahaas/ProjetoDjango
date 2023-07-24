@@ -1,9 +1,131 @@
-<h2>Atualizar Avaliação</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Escrever uma Revisão</title>
+    <style>
+        /* Estilos adicionais aqui */
 
-<form method="post">
-  {% csrf_token %}
-  
-  {{ form.as_p }}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
 
-  <button type="submit">Atualizar Avaliação</button>
-</form>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Botão estilizado */
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            align-self: flex-end;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Escrever uma Revisão para "{{ book.title }}"</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.rating.id_for_label }}">Avaliação:</label>
+                {{ form.rating }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.comment.id_for_label }}">Comentário:</label>
+                {{ form.comment }}
+            </div>
+            <!-- Botão estilizado -->
+            <button type="submit" id="submitButton">Enviar Revisão</button>
+        </form>
+
+        {% if review.id %}
+            <p><a href="{% url 'reviewupdate' review.id %}">Atualizar Revisão</a></p>
+        {% endif %}
+
+        <p><a href="{% url 'listbooks' %}">Cancelar</a></p>
+    </div>
+
+    <script>
+        var reviewId = {{ review.id|default:0 }};
+    </script>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function (event) {
+            event.preventDefault();
+            if (reviewId) {
+             // Redireciona para a página de reviewupdate com o ID da revisão
+                window.location.href = '/reviewupdate/' + reviewId + '/';
+            } else {
+            // Redireciona para a página de writereview com o ID do livro
+                window.location.href = '/writereview/{{ book.id }}/';
+            }
+      });
+    </script>
+
+    
+    <!-- Resto do seu código HTML aqui -->
+
+</body>
+</html>

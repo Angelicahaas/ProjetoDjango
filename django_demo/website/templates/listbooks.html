@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Livros Registrados</title>
+    <style>
+        /* Estilos adicionais aqui */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #e1cfe4; /* Roxo claro */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        /* Estilos para os contêineres de livros */
+        .books-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .book-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            position: relative;
+        }
+
+        .book-card:hover {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .back-btn {
+            background-color: #6a1b9a; /* Roxo escuro */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 20px;
+            display: block;
+            margin: 0 auto; /* Centraliza horizontalmente */
+        }
+
+        .back-btn:hover {
+            background-color: #4a148c; /* Roxo médio */
+        }
+
+        /* Estilizando o botão Voltar fora do container */
+        .back-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #6a1b9a; /* Roxo escuro */
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #6a1b9a; /* Roxo escuro */
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Livros Registrados</h1>
+
+    <div class="books-container">
+        <!-- Loop para exibir os livros registrados -->
+        {% for book in books %}
+            <div class="book-card">
+                <h3>{{ book.title }}</h3>
+                <p>Autor: {{ book.author }}</p>
+                <button class="delete-btn" onclick="showConfirmation('{{ book.title }}', {{ book.id }})">X</button>
+                <a href="{% url 'writereview' book.id %}">
+                    <div class="book-card">
+                        <h3>{{ book.title }}</h3>
+                        <p>Autor: {{ book.author }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Botão de voltar fora do container -->
+    <div class="back-btn-container">
+        <button class="back-btn" onclick="window.location.href='{% url 'home' %}'">Voltar</button>
+    </div>
+
+</div>
+
+<!-- Script para mostrar a confirmação -->
+<script>
+  function showConfirmation(title, book_Id) {
+      if (confirm(`Deseja apagar o livro "${title}"?`)) {
+          // Se o usuário clicar em "Sim", redireciona para a página de exclusão
+          window.location.href = `/bookdelete/${book_Id}/`;
+      } else {
+          // Caso contrário, não faz nada
+          return false;
+      }
+  }
+</script>
+  
+</body>
+</html>

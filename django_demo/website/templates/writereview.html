@@ -1,9 +1,211 @@
-<h2>Escrever uma Resenha para "{{ book.title }}"</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Escrever uma Revisão</title>
+    <!-- Adicionando os estilos do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionais aqui */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
 
-<form method="post">
-  {% csrf_token %}
-  
-  {{ form.as_p }}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f5f0fc; /* Roxo claro */
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-  <button type="submit">Enviar Resenha</button>
-</form>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #662d91; /* Roxo mais escuro */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Botão estilizado do Bootstrap */
+        button[type="submit"],
+        .btn {
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #662d91; /* Roxo mais escuro */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+            align-self: flex-end;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a1b6d; /* Roxo escuro */
+        }
+
+        .btn-secondary {
+            margin-right: 10px;
+            background-color: #9c71e8; /* Roxo claro */
+        }
+
+        .btn-warning {
+            background-color: #9c71e8; /* Roxo claro */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-warning:hover {
+            background-color: #804fb1; /* Roxo médio */
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        /* Estilos para a tabela de revisões salvas */
+        .table {
+            margin-top: 30px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilo para o botão de ação */
+        .action-btn {
+            display: flex;
+            align-items: center;
+        }
+
+        .action-btn .btn {
+            margin-right: 10px;
+        }
+
+        /* Estilizando os campos de avaliação e comentário */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        textarea.form-control {
+            resize: none;
+            height: 150px;
+        }
+
+        /* Estilo para o título do comentário */
+        .comment-title {
+            color: #662d91; /* Roxo mais escuro */
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Estilo para o retângulo do comentário */
+        .comment-rectangle {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            position: relative;
+            margin: 0 auto; /* Centraliza horizontalmente */
+            width: 80%; /* Largura definida */
+            text-align: center; /* Centraliza o texto */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Título -->
+        <h1 class="my-4">Escrever uma Revisão para "{{ book.title }}"</h1>
+
+        <!-- Formulário de revisão -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.rating.id_for_label }}">Avaliação:</label>
+                {{ form.rating }}
+            </div>
+            <div class="form-group">
+                <div class="comment-title">Comentário:</div>
+                <div class="comment-rectangle">
+                    {{ form.comment }}
+                </div>
+            </div>
+            <!-- Botão estilizado do Bootstrap -->
+            <button type="submit" class="btn btn-primary">Salvar Revisão</button>
+        </form>
+    </div>
+
+    <!-- Mensagem de revisão enviada com sucesso -->
+    {% if review_id %}
+    <div class="alert alert-success mt-3" role="alert">
+        Revisão enviada com sucesso!
+    </div>
+    <!-- Botão para atualizar a revisão -->
+    <a href="{% url 'reviewupdate' review_id %}" class="btn btn-secondary">Atualizar Revisão</a>
+{% endif %}
+
+        <!-- Revisões Salvas -->
+    <div class="container">
+        <h2 class="my-4">Revisões Salvas:</h2>
+        {% if review %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Avaliação</th>
+                        <th scope="col">Comentário</th>
+                        <th scope="col">Ação</th> <!-- Nova coluna para os botões de ação -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.rating }}</td>
+                        <td>{{ review.comment }}</td>
+                        <td class="action-btn">
+                            <!-- Botão de atualização -->
+                            <a href="{% url 'reviewupdate' review.id %}" class="btn btn-warning btn-sm">Atualizar</a>
+                            <a href="{% url 'delete_review' review.id %}" class="btn btn-warning btn-sm">Apagar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Não há avaliações</p>
+        {% endif %}
+    </div>
+
+<!-- Botão de cancelar -->
+<div class="container text-center">
+    <a href="{% url 'listbooks' %}" class="btn btn-secondary">Cancelar</a>
+</div>
+
+</body>
+</html>
